@@ -1,9 +1,9 @@
-const fs = require('node:fs');
-const path = require('path')
-const Mustache = require('mustache')
-const { DateTime } = require("luxon");
+import { readFileSync } from 'node:fs';
+import { resolve } from 'path';
+import Mustache from 'mustache';
+import { DateTime } from "luxon";
 
-const { normalizeString, groupItemsByProperty } = require('./Common')
+import Common from './Common.js';
 
 const formatTimeString = dt => {
   const hour = dt.toFormat('h')
@@ -22,7 +22,7 @@ const formats = {
     })
 
     // group events by date for hierarchical display, limiting to specified number of items
-    const eventsGrouped = groupItemsByProperty(events, 'date', 'events').slice(0, args.count)
+    const eventsGrouped = Common.groupItemsByProperty(events, 'date', 'events').slice(0, args.count)
 
     // reformat date group heading to be more human-readable
     eventsGrouped.map(g => {
@@ -44,10 +44,10 @@ const formats = {
     })
 
     try {
-      const eventsTemplate = fs.readFileSync(path.resolve(__dirname, '../templates/html/events.html'), 'utf8')
+      const eventsTemplate = readFileSync(resolve(__dirname, '../templates/html/events.html'), 'utf8')
       const eventsRendered = Mustache.render(eventsTemplate, { dates: eventsGrouped })
 
-      const eventsWrapTemplate = fs.readFileSync(path.resolve(__dirname, '../templates/html/events-wrap.html'), 'utf8')
+      const eventsWrapTemplate = readFileSync(resolve(__dirname, '../templates/html/events-wrap.html'), 'utf8')
       const eventsWrapRendered = Mustache.render(eventsWrapTemplate, { events: eventsRendered })
 
       return {
@@ -96,7 +96,7 @@ class Events {
       events = events.filter(ev => {
         let arg = args.group.toLowerCase()
         let groups = arg.split('|')
-        let group = normalizeString(ev.group_name).toLowerCase()
+        let group = Common.normalizeString(ev.group_name).toLowerCase()
 
         console.log(groups, group)
         return groups.includes(group)
@@ -119,4 +119,4 @@ class Events {
   }
 }
 
-module.exports = Events
+export default Events

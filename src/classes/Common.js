@@ -35,4 +35,4 @@ class Common {
   }
 }
 
-module.exports = Common
+export default Common

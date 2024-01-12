@@ -1,5 +1,5 @@
-const { filterEvents } = require('../classes/Events')
-const { XMLParser } = require("fast-xml-parser");
+import Events from '../classes/Events.js'
+import { XMLParser } from "fast-xml-parser";
 
 class Ccb {
   constructor(endpoint, username, password) {
@@ -40,7 +40,7 @@ class Ccb {
       return { error: `Error(s) returned from upstream API`, details: data.ccb_api.response.errors }
     }
 
-    let events = filterEvents(data.ccb_api.response.items.item, args)
+    let events = Events.filterEvents(data.ccb_api.response.items.item, args)
 
     return events
   }
@@ -58,4 +58,4 @@ class Ccb {
   }
 }
 
-module.exports = Ccb
+export default Ccb

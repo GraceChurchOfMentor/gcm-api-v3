@@ -2,15 +2,16 @@
   "name": "gcm-api-v3",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0",
+    "@azure/functions": "^4.1.0",
     "@boxcast/boxcast-sdk-js": "^2.0.2",
-    "fast-xml-parser": "^4.3.2",
-    "luxon": "^3.4.3",
+    "fast-xml-parser": "^4.3.3",
+    "luxon": "^3.4.4",
     "mustache": "^4.2.0"
   },
   "main": "src/functions/*.js"

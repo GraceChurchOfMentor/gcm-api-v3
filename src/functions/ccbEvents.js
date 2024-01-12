@@ -1,8 +1,8 @@
-const { app } = require('@azure/functions')
-const { DateTime } = require("luxon")
-const Ccb = require('../classes/Ccb')
-const { formatEvents } = require('../classes/Events')
-const ccbConfig = require('../config/ccb')
+import { app } from '@azure/functions'
+import { DateTime } from 'luxon'
+import Ccb from '../classes/Ccb.js'
+import Events from '../classes/Events.js'
+import ccbConfig from '../config/ccb.js'
 
 app.http('ccbEvents', {
     methods: ['GET'],
@@ -28,6 +28,6 @@ app.http('ccbEvents', {
 
         let events = await ccb.fetchEvents(dateStart, dateEnd, args)
 
-        return formatEvents(events, request, { dateStart, dateEnd }, args, format)
+        return Events.formatEvents(events, request, { dateStart, dateEnd }, args, format)
     }
 })

@@ -1,5 +1,5 @@
-const { app } = require('@azure/functions')
-const BoxCastSDK = require('@boxcast/boxcast-sdk-js/node')
+import { app } from '@azure/functions'
+import BoxCastSDK from '@boxcast/boxcast-sdk-js/node.js'
 
 const config = {
     boxcastApiEndpoint: 'https://rest.boxcast.com'
