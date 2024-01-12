@@ -1,4 +1,4 @@
-const { app } = require('@azure/functions');
+const { app } = require('@azure/functions')
 const BoxCastSDK = require('@boxcast/boxcast-sdk-js/node')
 
 const config = {
@@ -59,4 +59,4 @@ app.http('boxcastCountdown', {
             details
         })
     }
-});
+})
